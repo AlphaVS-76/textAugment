@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import Textarea from "./components/Textarea";
 
 function App() {
+  const [color, setColor] = useState("light");
+  const [text, setText] = useState("Dark");
+  const [colText, setColText] = useState("black");
+  const [bg, setBg] = useState("light");
+
+  const darkMode = () => {
+    if (color === "light") {
+      setColor("dark");
+      setText("Light");
+      setColText("white");
+      setBg("dark");
+      document.body.style.backgroundColor = "black";
+    } else {
+      setColor("light");
+      setText("Dark");
+      setColText("black");
+      setBg("light");
+      document.body.style.backgroundColor = "white";
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar mode={darkMode} t={text} color={color} setCol={colText} />
+      <Textarea mode={darkMode} setCol={colText} bg={bg} />
+    </>
   );
 }
 
